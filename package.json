@@ -1,0 +1,12 @@
+{
+  "name": "apollo-lighthouse-subscription-link",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Konstantin Duczek <konz.duczek@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "apollo-client": "^2.6.8",
+    "apollo-link": "^1.2.14",
+    "laravel-echo": "^1.7.0"
+  }
+}
