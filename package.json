@@ -1,12 +1,23 @@
 {
   "name": "apollo-lighthouse-subscription-link",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "browser": "dist/index.bundle.js",
   "author": "Konstantin Duczek <konz.duczek@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
+  "scripts": {
+    "build": "rimraf dist && rollup --config"
+  },
+  "dependencies": {
     "apollo-client": "^2.6.8",
-    "apollo-link": "^1.2.14",
-    "laravel-echo": "^1.7.0"
+    "apollo-link": "^1.2.14"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^4.1.1",
+    "laravel-echo": "^1.7.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.7.6",
+    "typescript": "^3.8.3"
   }
 }
