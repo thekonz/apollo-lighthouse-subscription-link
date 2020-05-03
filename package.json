@@ -1,6 +1,6 @@
 {
   "name": "@thekonz/apollo-lighthouse-subscription-link",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "types": "dist/subscription-link.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
