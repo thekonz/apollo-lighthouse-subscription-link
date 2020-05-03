@@ -1,11 +1,14 @@
 {
-  "name": "apollo-lighthouse-subscription-link",
+  "name": "@thekonz/apollo-lighthouse-subscription-link",
   "version": "1.0.0",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "browser": "dist/index.bundle.js",
   "author": "Konstantin Duczek <konz.duczek@gmail.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rimraf dist && rollup --config",
     "test": "jest"

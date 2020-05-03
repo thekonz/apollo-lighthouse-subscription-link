@@ -3,3 +3,15 @@ node_js:
   - 14
   - 12
   - 10
+before_deploy: "yarn build"
+deploy:
+  provider: npm
+  email: konz.duzczek@gmail.com
+  api_key:
+    secure: emYntdLLX927g5NEckJvjXWFgrLjWVevnKKVzFC3rdABnM2/WQHPoIJeLndYcyYTZGtLi5OUL2fQiQgD5AhQYJwhsuClHL4tMDf35TS4XQbl/bJ2lezlDEcTwAkdZGwWJeehQs7rwm0lXF+qo5qpXn3sRY7V8FdS+ZT4U6e4VXSDXhtFv+widYDx2awTZ2B5mpYuwFpZPKGUKMvZrBTos1SXJser2R6IpaKphQpt+D1S3WN6hwus/hv/dRk0KNBHWN/2y1SMpLTkLzwRyE6EBE/BF5wT+b8rnQEFDLfSEQBxP2KzdCSaibjLQoGCi1d2e7sjf0zicZkw5nT1aFKiwWwmyCIYaiVCPBLw8ftyBCC/EIMPwm4f96bBWyzmLRawz9t/P+K25xkg4bZQvE83sDSA0lMgAYCNLuwVGXnD3gZmIYxxah6ffHHp8lSgdNyhNMCU3dwLLVpQqUqtZDFZfeXOfoameS0d3dyirDUanvbH9aorKCWETa/F5zMrCw6Gnjuw8GlgIamDnCEk2fsDAkqJznIW4suX3sq1ua82YPDW4bR6qNH6+jpSYlg4Ocgqi47ZjvNQG+cFWG7fU+ApWttv1Hj93FoyxLME8minAGNnMiEyjabrexuhZIbUh9YsTtRnYZhoctSWEMs9JaV1WOl3xoxRDywKTocTN4NJpcY=
+  on:
+    node_js: 14
+    tags: true
+    repo: thekonz/apollo-lighthouse-subscription-link
+    branch: master
+  skip_cleanup: "true"
