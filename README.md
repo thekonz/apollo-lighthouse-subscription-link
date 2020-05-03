@@ -1,4 +1,4 @@
-# Apollo Lighthouse subscription link
+# Apollo Lighthouse subscription link [![Build Status](https://travis-ci.org/thekonz/apollo-lighthouse-subscription-link.svg?branch=master)](https://travis-ci.org/thekonz/apollo-lighthouse-subscription-link)
 
 An apollo link to subscribe to Lighthouse graphql subscriptions using Laravel Echo presence channels.
 
