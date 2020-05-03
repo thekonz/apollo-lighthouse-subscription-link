@@ -1,6 +1,7 @@
 {
   "name": "@thekonz/apollo-lighthouse-subscription-link",
   "version": "1.0.0",
+  "types": "types/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "browser": "dist/index.bundle.js",
@@ -10,9 +11,15 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rimraf dist && rollup --config",
+    "build": "yarn clean && yarn rollup && yarn types",
+    "clean": "rimraf dist",
+    "rollup": "rollup --config",
+    "types": "tsc --declaration --emitDeclarationOnly --outfile dist/index.d.ts src/subscription-link.ts",
     "test": "jest"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "apollo-client": "^2.6.8",
     "apollo-link": "^1.2.14"
@@ -27,6 +34,7 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.7.6",
     "ts-jest": "^25.4.0",
+    "tsc": "^1.20150623.0",
     "typescript": "^3.8.3"
   }
 }
