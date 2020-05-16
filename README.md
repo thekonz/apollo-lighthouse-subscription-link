@@ -1,8 +1,8 @@
-# Apollo Lighthouse subscription link [![Build Status](https://travis-ci.org/thekonz/apollo-lighthouse-subscription-link.svg?branch=master)](https://travis-ci.org/thekonz/apollo-lighthouse-subscription-link)
+# Apollo Lighthouse Subscription Link [![Build Status](https://travis-ci.org/thekonz/apollo-lighthouse-subscription-link.svg?branch=master)](https://travis-ci.org/thekonz/apollo-lighthouse-subscription-link)
 
 An apollo link to subscribe to Lighthouse graphql subscriptions using Laravel Echo presence channels.
 
-For the server solution, check out the [Lighthouse Redis Broadcaster Build Status](https://github.com/thekonz/lighthouse-redis-broadcaster).
+For the server solution, check out the [Lighthouse Redis Broadcaster](https://github.com/thekonz/lighthouse-redis-broadcaster).
 
 ## Installation
 
