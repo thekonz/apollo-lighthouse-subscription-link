@@ -2,6 +2,8 @@
 
 An apollo link to subscribe to Lighthouse graphql subscriptions using Laravel Echo presence channels.
 
+For the server solution, check out the [Lighthouse Redis Broadcaster Build Status](https://github.com/thekonz/lighthouse-redis-broadcaster).
+
 ## Installation
 
 ```bash
