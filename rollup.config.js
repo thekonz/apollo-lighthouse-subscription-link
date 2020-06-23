@@ -12,14 +12,6 @@ export default {
       file: packageInfo.module,
       format: "es",
     },
-    {
-      file: packageInfo.browser,
-      format: "iife",
-      name: "ApolloLighthouseSubscriptionLink",
-      globals: {
-        "apollo-link": "ApolloLink",
-      },
-    },
   ],
   external: ["apollo-link"],
   plugins: [typescript()],
