@@ -4,7 +4,6 @@
   "types": "dist/subscription-link.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "browser": "dist/index.bundle.js",
   "author": "Konstantin Duczek <konz.duczek@gmail.com>",
   "license": "MIT",
   "publishConfig": {
