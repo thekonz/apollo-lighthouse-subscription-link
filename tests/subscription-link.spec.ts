@@ -15,7 +15,7 @@ function make(echo: Echo) {
 }
 
 const subscription = gql`
-  subscription someSubscription {
+  subscription {
     someEvent {
       someProperty
     }
@@ -23,7 +23,7 @@ const subscription = gql`
 `;
 
 const query = gql`
-  query someQuery {
+  query {
     someThing {
       someProperty
     }
@@ -71,7 +71,7 @@ describe("subscription link", () => {
       },
       extensions: {
         lighthouse_subscriptions: {
-          channels: { someSubscription: "private-lighthouse-1234" },
+          channels: { someEvent: "private-lighthouse-1234" },
         },
       },
     });

@@ -11,6 +11,7 @@ import type Echo from "laravel-echo";
 import { Observer } from "apollo-client/util/Observable";
 
 import type { PresenceChannel, Channel } from "laravel-echo/dist/channel";
+import { OperationDefinitionNode, FieldNode } from "graphql";
 
 // The presence channel interface does not have the channel methods,
 // but in reality the actual object does, so I try to fix this here.
@@ -34,10 +35,11 @@ function createSubscriptionHandler(
   observer: Observer<FetchResult>
 ) {
   return (data: FetchResult) => {
+    const operationDefinition: OperationDefinitionNode = operation.query.definitions.find(definitionNode => definitionNode.kind === "OperationDefinition") as OperationDefinitionNode
+    const fieldNode: FieldNode = operationDefinition.selectionSet.selections.find(definitionNode => definitionNode.kind === "Field") as FieldNode
+    const subscriptionName: string | null = fieldNode.name.value
     const channelName: string | null =
-      data?.extensions?.lighthouse_subscriptions?.channels?.[
-        operation.operationName
-      ];
+      data?.extensions?.lighthouse_subscriptions?.channels?.[subscriptionName];
 
     if (channelName) {
       subscribeToEcho(echoClient, channelName, observer);
