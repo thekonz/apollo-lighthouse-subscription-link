@@ -20,7 +20,7 @@ yarn add @thekonz/apollo-lighthouse-subscription-link
 ## Usage
 
 ```javascript
-import ApolloClient from "apollo-client";
+import ApolloClient from "@apollo/client";
 import gql from "graphql-tag";
 import Echo from "laravel-echo";
 
