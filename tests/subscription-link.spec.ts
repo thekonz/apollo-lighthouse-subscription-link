@@ -78,7 +78,7 @@ describe("subscription link", () => {
     // echo presence channel should now be joined and listened to
     expect(echo.join).toHaveBeenCalledWith("private-lighthouse-1234");
     expect(echo.listen).toHaveBeenCalledWith(
-      ".lighthouse.subscription",
+      ".lighthouse-subscription",
       expect.any(Function)
     );
 
