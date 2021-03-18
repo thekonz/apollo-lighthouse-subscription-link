@@ -46,7 +46,7 @@ describe("subscription link", () => {
   it("subscribes to echo channels and listens to echo events", () => {
     // set up mocks
     const echo = {
-      join: jest.fn().mockReturnThis(),
+      private: jest.fn().mockReturnThis(),
       listen: jest.fn().mockReturnThis(),
     };
     let observer: Observer<FetchResult>;
@@ -60,7 +60,7 @@ describe("subscription link", () => {
 
     // execute the subscription, no listener should have been called yet
     execute(link, { query: subscription }).subscribe(subscriptionHandler);
-    expect(echo.join).not.toHaveBeenCalled();
+    expect(echo.private).not.toHaveBeenCalled();
     expect(echo.listen).not.toHaveBeenCalled();
     expect(subscriptionHandler).not.toHaveBeenCalled();
 
@@ -76,7 +76,7 @@ describe("subscription link", () => {
       },
     });
     // echo presence channel should now be joined and listened to
-    expect(echo.join).toHaveBeenCalledWith("private-lighthouse-1234");
+    expect(echo.private).toHaveBeenCalledWith("lighthouse-1234");
     expect(echo.listen).toHaveBeenCalledWith(
       ".lighthouse-subscription",
       expect.any(Function)
@@ -98,7 +98,7 @@ describe("subscription link", () => {
   it("forwards any query without subscription data", () => {
     // same as before
     const echo = {
-      join: jest.fn().mockReturnThis(),
+      private: jest.fn().mockReturnThis(),
       listen: jest.fn().mockReturnThis(),
     };
     let observer: Observer<FetchResult>;
@@ -112,7 +112,7 @@ describe("subscription link", () => {
 
     // but with a query
     execute(link, { query }).subscribe(listener);
-    expect(echo.join).not.toHaveBeenCalled();
+    expect(echo.private).not.toHaveBeenCalled();
     expect(echo.listen).not.toHaveBeenCalled();
     expect(listener).not.toHaveBeenCalled();
 
@@ -123,14 +123,14 @@ describe("subscription link", () => {
       },
     };
     observer.next(result);
-    expect(echo.join).not.toHaveBeenCalled();
+    expect(echo.private).not.toHaveBeenCalled();
     expect(echo.listen).not.toHaveBeenCalled();
     expect(listener).toHaveBeenCalledWith(result);
   });
 
   it('can be unsubscribed', () => {
     const echo = {
-      join: jest.fn().mockReturnThis(),
+      private: jest.fn().mockReturnThis(),
       listen: jest.fn().mockReturnThis(),
       leave: jest.fn().mockReturnThis(),
     };
