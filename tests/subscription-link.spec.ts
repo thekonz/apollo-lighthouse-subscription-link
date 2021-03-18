@@ -86,13 +86,13 @@ describe("subscription link", () => {
     const listener: Function = echo.listen.mock.calls[0][1];
     expect(subscriptionHandler).not.toHaveBeenCalled();
     const events = [
-      { data: { someEvent: { someProperty: "no" } } },
-      { data: { someEvent: { someProperty: "yes" } } },
+      { data: { data: { someEvent: { someProperty: "no" } } }, extensions: {} },
+      { data: { data: { someEvent: { someProperty: "yes" } } }, extensions: {} },
     ];
     listener(events[0]);
-    expect(subscriptionHandler).toHaveBeenCalledWith(events[0].data);
+    expect(subscriptionHandler).toHaveBeenCalledWith(events[0].data.data);
     listener(events[1]);
-    expect(subscriptionHandler).toHaveBeenCalledWith(events[1].data);
+    expect(subscriptionHandler).toHaveBeenCalledWith(events[1].data.data);
   });
 
   it("forwards any query without subscription data", () => {
