@@ -127,4 +127,34 @@ describe("subscription link", () => {
     expect(echo.listen).not.toHaveBeenCalled();
     expect(listener).toHaveBeenCalledWith(result);
   });
+
+  it('can be unsubscribed', () => {
+    const echo = {
+      join: jest.fn().mockReturnThis(),
+      listen: jest.fn().mockReturnThis(),
+      leave: jest.fn().mockReturnThis(),
+    };
+    let observer: Observer<FetchResult>;
+    const link = ApolloLink.from([
+      make(echoMock(echo)),
+      createFakeHttpLink(
+        (currentObserver: Observer<FetchResult>) => (observer = currentObserver)
+      ),
+    ]);
+
+    const subscriber = execute(link, { query: subscription }).subscribe(() => {});
+    observer.next({
+      data: {
+        someEvent: null,
+      },
+      extensions: {
+        lighthouse_subscriptions: {
+          channels: { someEvent: "private-lighthouse-2345" },
+        },
+      },
+    });
+    expect(echo.leave).not.toHaveBeenCalled();
+    subscriber.unsubscribe();
+    expect(echo.leave).toHaveBeenCalledWith("private-lighthouse-2345");
+  })
 });

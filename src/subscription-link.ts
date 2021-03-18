@@ -29,10 +29,18 @@ function subscribeToEcho(
   );
 }
 
+function unsubscribe(echoClient: Echo, getChannelName: () => string) {
+  const channelName = getChannelName();
+  if (channelName) {
+    echoClient.leave(channelName);
+  }
+}
+
 function createSubscriptionHandler(
   echoClient: Echo,
   operation: Operation,
-  observer: Observer<FetchResult>
+  observer: Observer<FetchResult>,
+  setChannelName: (name: string) => any
 ) {
   return (data: FetchResult) => {
     const operationDefinition: OperationDefinitionNode = operation.query.definitions.find(definitionNode => definitionNode.kind === "OperationDefinition") as OperationDefinitionNode
@@ -42,6 +50,7 @@ function createSubscriptionHandler(
       data?.extensions?.lighthouse_subscriptions?.channels?.[subscriptionName];
 
     if (channelName) {
+      setChannelName(channelName);
       subscribeToEcho(echoClient, channelName, observer);
     } else {
       observer.next(data);
@@ -52,10 +61,14 @@ function createSubscriptionHandler(
 
 function createRequestHandler(echoClient: Echo): RequestHandler {
   return (operation: Operation, forward: NextLink): Observable<FetchResult> => {
+    let channelName: string;
+
     return new Observable((observer) => {
       forward(operation).subscribe(
-        createSubscriptionHandler(echoClient, operation, observer)
+        createSubscriptionHandler(echoClient, operation, observer, (name) => channelName = name)
       );
+
+      return () => unsubscribe(echoClient, () => channelName);
     });
   };
 }
