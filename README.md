@@ -12,6 +12,13 @@ npm install @thekonz/apollo-lighthouse-subscription-link
 yarn add @thekonz/apollo-lighthouse-subscription-link
 ```
 
+## Lighthouse compatibility
+
+| Lighthouse version | Link version | Comment |
+| - | - | - |
+| 5.2 and below | 1.1 and below | |
+| 5.3 and above | 1.2 and above | The event name changed from 'lighthouse.subscription' to 'lighthouse-subscription' |
+
 ## Usage
 
 ```javascript
@@ -31,7 +38,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-client
+const subscriber = client
   .subscribe({
     query: gql`
       subscription {
@@ -45,6 +52,9 @@ client
   .subscribe(({ data }) => {
     console.log(data.postUpdated); // { id: 2, title: "New title" }
   });
+
+// stop listening to events
+subscriber.unsubscribe()
 ```
 
 ## Contributing and issues

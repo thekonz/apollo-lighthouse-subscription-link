@@ -24,7 +24,7 @@ function subscribeToEcho(
 ) {
   const channel = echoClient.join(channelName) as FixedEchoChannel;
 
-  channel.listen(".lighthouse.subscription", (result: { data: any }) =>
+  channel.listen(".lighthouse-subscription", (result: { data: any }) =>
     observer.next({ data: result.data })
   );
 }
