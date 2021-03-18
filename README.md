@@ -47,8 +47,8 @@ const subscriber = client
       }
     `,
   })
-  .subscribe(({ data }) => {
-    console.log(data.postUpdated); // { id: 2, title: "New title" }
+  .subscribe(({ postUpdated }) => {
+    console.log(postUpdated); // { id: 2, title: "New title" }
   });
 
 // stop listening to events
