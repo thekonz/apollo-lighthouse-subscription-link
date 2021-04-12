@@ -47,7 +47,7 @@ function createSubscriptionHandler(
     const fieldNode: FieldNode = operationDefinition.selectionSet.selections.find(definitionNode => definitionNode.kind === "Field") as FieldNode
     const subscriptionName: string | null = fieldNode.name.value
     const channelName: string | null =
-      data?.extensions?.lighthouse_subscriptions?.channels?.[subscriptionName];
+      data?.extensions?.lighthouse_subscriptions?.channel;
 
     if (channelName) {
       setChannelName(channelName);
