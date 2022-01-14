@@ -16,6 +16,7 @@ yarn add @thekonz/apollo-lighthouse-subscription-link
 | - | - | - |
 | 5.2 and below | 1.1 and below | |
 | 5.3 and above | 1.2 and above | The event name changed from 'lighthouse.subscription' to 'lighthouse-subscription' |
+| 5.3 and above | 1.3 and above | Support for 'lighthouse.subscription.version' = 2 |
 
 ## Usage
 
@@ -47,7 +48,7 @@ const subscriber = client
       }
     `,
   })
-  .subscribe(({ postUpdated }) => {
+  .subscribe((postUpdated) => {
     console.log(postUpdated); // { id: 2, title: "New title" }
   });
 
