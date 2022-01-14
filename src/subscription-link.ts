@@ -45,9 +45,12 @@ function createSubscriptionHandler(
   return (data: FetchResult) => {
     const operationDefinition: OperationDefinitionNode = operation.query.definitions.find(definitionNode => definitionNode.kind === "OperationDefinition") as OperationDefinitionNode
     const fieldNode: FieldNode = operationDefinition.selectionSet.selections.find(definitionNode => definitionNode.kind === "Field") as FieldNode
-    const subscriptionName: string | null = fieldNode.name.value
-    const channelName: string | null =
-      data?.extensions?.lighthouse_subscriptions?.channels?.[subscriptionName];
+    const subscriptionName: string | null = fieldNode.name.value;
+    const lighthouseVersion = data?.extensions?.lighthouse_subscriptions?.version; 
+      
+    const channelName: string | null = lighthouseVersion == 2 ?
+        data?.extensions?.lighthouse_subscriptions?.channel :
+        data?.extensions?.lighthouse_subscriptions?.channels?.[subscriptionName];
 
     if (channelName) {
       setChannelName(channelName);

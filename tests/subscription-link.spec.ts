@@ -95,6 +95,61 @@ describe("subscription link", () => {
     expect(subscriptionHandler).toHaveBeenCalledWith(events[1].data.data);
   });
 
+  it("works with version 2.", () => {
+    // set up mocks
+    const echo = {
+      private: jest.fn().mockReturnThis(),
+      listen: jest.fn().mockReturnThis(),
+    };
+
+    let observer: Observer<FetchResult>;
+    const subscriptionHandler = jest.fn();
+    const link = ApolloLink.from([
+      make(echoMock(echo)),
+      createFakeHttpLink(
+        (currentObserver: Observer<FetchResult>) => (observer = currentObserver)
+      ),
+    ]);
+
+    // execute the subscription, no listener should have been called yet
+    execute(link, { query: subscription }).subscribe(subscriptionHandler);
+    expect(echo.private).not.toHaveBeenCalled();
+    expect(echo.listen).not.toHaveBeenCalled();
+    expect(subscriptionHandler).not.toHaveBeenCalled();
+
+    // the graphql response from the http link will look like this
+    observer.next({
+      data: {
+        someEvent: null,
+      },
+      extensions: {
+        lighthouse_subscriptions: {
+          version: 2,
+          channel: "private-lighthouse-1234",
+        }
+      },
+    });
+    // echo presence channel should now be joined and listened to
+    expect(echo.private).toHaveBeenCalledWith("lighthouse-1234");
+    expect(echo.listen).toHaveBeenCalledWith(
+      ".lighthouse-subscription",
+      expect.any(Function)
+    );
+
+    // now we fire some events and the subscriber gets triggered with events
+    // now we fire some events and the subscriber gets triggered with events
+    const listener: Function = echo.listen.mock.calls[0][1];
+    expect(subscriptionHandler).not.toHaveBeenCalled();
+    const events = [
+      { data: { data: { someEvent: { someProperty: "no" } } }, extensions: {} },
+      { data: { data: { someEvent: { someProperty: "yes" } } }, extensions: {} },
+    ];
+    listener(events[0]);
+    expect(subscriptionHandler).toHaveBeenCalledWith(events[0].data.data);
+    listener(events[1]);
+    expect(subscriptionHandler).toHaveBeenCalledWith(events[1].data.data);
+  });
+    
   it("forwards any query without subscription data", () => {
     // same as before
     const echo = {
@@ -142,7 +197,7 @@ describe("subscription link", () => {
       ),
     ]);
 
-    const subscriber = execute(link, { query: subscription }).subscribe(() => {});
+    const subscriber = execute(link, { query: subscription }).subscribe(() => { });
     observer.next({
       data: {
         someEvent: null,
