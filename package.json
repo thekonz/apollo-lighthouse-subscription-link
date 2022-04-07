@@ -20,8 +20,7 @@
     "dist"
   ],
   "dependencies": {
-    "apollo-client": "^2.6.8",
-    "apollo-link": "^1.2.14"
+    "@apollo/client": "^3.5.10"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^4.1.1",
