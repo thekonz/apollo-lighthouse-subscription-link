@@ -1,14 +1,14 @@
-import { ApolloLink, Observable } from "apollo-link";
+import { ApolloLink, Observable } from "@apollo/client";
 
 import type {
   Operation,
   NextLink,
   FetchResult,
   RequestHandler,
-} from "apollo-link";
+} from "@apollo/client";
 
 import type Echo from "laravel-echo";
-import { Observer } from "apollo-client/util/Observable";
+import { Observer } from "@apollo/client";
 
 import type { PresenceChannel, Channel } from "laravel-echo/dist/channel";
 import { OperationDefinitionNode, FieldNode } from "graphql";
