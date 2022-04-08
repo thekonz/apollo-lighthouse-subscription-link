@@ -1,7 +1,7 @@
 import { createLighthouseSubscriptionLink } from "../src/subscription-link";
 import gql from "graphql-tag";
 import Echo from "laravel-echo";
-import { Observer, ApolloLink, execute, Observable, FetchResult } from "@apollo/client";
+import { Observer, ApolloLink, Observable, execute, FetchResult } from "@apollo/client/core";
 
 jest.mock("laravel-echo");
 
