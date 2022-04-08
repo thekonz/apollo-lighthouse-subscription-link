@@ -28,11 +28,11 @@
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
     "jest": "^25.5.4",
-    "laravel-echo": "^1.7.0",
+    "laravel-echo": "^1.11.4",
     "rimraf": "^3.0.2",
     "rollup": "^2.7.6",
     "ts-jest": "^25.4.0",
-    "tsc": "^1.20150623.0",
+    "tsc": "^2.0.4",
     "typescript": "^3.8.3"
   }
 }
