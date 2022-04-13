@@ -23,7 +23,7 @@ function subscribeToEcho(
   const channel = echoClient.private(channelName.replace(/^private\-/, '')) as FixedEchoChannel;
 
   channel.listen(".lighthouse-subscription", (result: { data: any }) =>
-    observer.next(result.data?.data || result.data)
+    observer.next(result.data)
   );
 }
 
