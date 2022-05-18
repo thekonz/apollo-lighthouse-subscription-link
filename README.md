@@ -1,4 +1,4 @@
-# Apollo Lighthouse Subscription Link [![Build Status](https://travis-ci.org/thekonz/apollo-lighthouse-subscription-link.svg?branch=master)](https://travis-ci.org/thekonz/apollo-lighthouse-subscription-link)
+# Apollo Lighthouse Subscription Link
 
 An apollo link to subscribe to Lighthouse graphql subscriptions using Laravel Echo presence channels.
 
@@ -12,11 +12,11 @@ yarn add @thekonz/apollo-lighthouse-subscription-link
 
 ## Lighthouse compatibility
 
-| Lighthouse version | Link version | Comment |
-| - | - | - |
-| 5.2 and below | 1.1 and below | |
-| 5.3 and above | 1.2 and above | The event name changed from 'lighthouse.subscription' to 'lighthouse-subscription' |
-| 5.3 and above | 1.3 and above | Support for 'lighthouse.subscription.version' = 2 |
+| Lighthouse version | Link version  | Comment                                                                            |
+| ------------------ | ------------- | ---------------------------------------------------------------------------------- |
+| 5.2 and below      | 1.1 and below |                                                                                    |
+| 5.3 and above      | 1.2 and above | The event name changed from 'lighthouse.subscription' to 'lighthouse-subscription' |
+| 5.3 and above      | 1.3 and above | Support for 'lighthouse.subscription.version' = 2                                  |
 
 ## Usage
 
