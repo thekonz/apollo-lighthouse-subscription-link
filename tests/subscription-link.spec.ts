@@ -89,9 +89,9 @@ describe("subscription link", () => {
       { data: { someEvent: { someProperty: "yes" } }, extensions: {} },
     ];
     listener(events[0]);
-    expect(subscriptionHandler).toHaveBeenCalledWith(events[0].data.data);
+    expect(subscriptionHandler).toHaveBeenCalledWith(events[0].data);
     listener(events[1]);
-    expect(subscriptionHandler).toHaveBeenCalledWith(events[1].data.data);
+    expect(subscriptionHandler).toHaveBeenCalledWith(events[1].data);
   });
 
   it("works with version 2.", () => {
@@ -144,9 +144,9 @@ describe("subscription link", () => {
       { data: { someEvent: { someProperty: "yes" } }, extensions: {} },
     ];
     listener(events[0]);
-    expect(subscriptionHandler).toHaveBeenCalledWith(events[0].data.data);
+    expect(subscriptionHandler).toHaveBeenCalledWith(events[0].data);
     listener(events[1]);
-    expect(subscriptionHandler).toHaveBeenCalledWith(events[1].data.data);
+    expect(subscriptionHandler).toHaveBeenCalledWith(events[1].data);
   });
     
   it("forwards any query without subscription data", () => {
