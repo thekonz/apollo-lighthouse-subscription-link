@@ -85,8 +85,8 @@ describe("subscription link", () => {
     const listener: Function = echo.listen.mock.calls[0][1];
     expect(subscriptionHandler).not.toHaveBeenCalled();
     const events = [
-      { data: { data: { someEvent: { someProperty: "no" } } }, extensions: {} },
-      { data: { data: { someEvent: { someProperty: "yes" } } }, extensions: {} },
+      { data: { someEvent: { someProperty: "no" } }, extensions: {} },
+      { data: { someEvent: { someProperty: "yes" } }, extensions: {} },
     ];
     listener(events[0]);
     expect(subscriptionHandler).toHaveBeenCalledWith(events[0].data.data);
@@ -140,8 +140,8 @@ describe("subscription link", () => {
     const listener: Function = echo.listen.mock.calls[0][1];
     expect(subscriptionHandler).not.toHaveBeenCalled();
     const events = [
-      { data: { data: { someEvent: { someProperty: "no" } } }, extensions: {} },
-      { data: { data: { someEvent: { someProperty: "yes" } } }, extensions: {} },
+      { data: { someEvent: { someProperty: "no" } }, extensions: {} },
+      { data: { someEvent: { someProperty: "yes" } }, extensions: {} },
     ];
     listener(events[0]);
     expect(subscriptionHandler).toHaveBeenCalledWith(events[0].data.data);
