@@ -13,6 +13,6 @@ export default {
       format: "es",
     },
   ],
-  external: ["apollo-link"],
+  external: ["@apollo/client/core"],
   plugins: [typescript()],
 };
