@@ -1,7 +1,13 @@
 import { createLighthouseSubscriptionLink } from "../src/subscription-link";
 import gql from "graphql-tag";
 import Echo from "laravel-echo";
-import { Observer, ApolloLink, Observable, execute, FetchResult } from "@apollo/client/core";
+import {
+  Observer,
+  ApolloLink,
+  Observable,
+  execute,
+  FetchResult,
+} from "@apollo/client/core";
 
 jest.mock("laravel-echo");
 
@@ -125,7 +131,7 @@ describe("subscription link", () => {
         lighthouse_subscriptions: {
           version: 2,
           channel: "private-lighthouse-1234",
-        }
+        },
       },
     });
     // echo presence channel should now be joined and listened to
@@ -135,7 +141,6 @@ describe("subscription link", () => {
       expect.any(Function)
     );
 
-    // now we fire some events and the subscriber gets triggered with events
     // now we fire some events and the subscriber gets triggered with events
     const listener: Function = echo.listen.mock.calls[0][1];
     expect(subscriptionHandler).not.toHaveBeenCalled();
@@ -148,7 +153,7 @@ describe("subscription link", () => {
     listener(events[1]);
     expect(subscriptionHandler).toHaveBeenCalledWith(events[1].data);
   });
-    
+
   it("forwards any query without subscription data", () => {
     // same as before
     const echo = {
@@ -182,7 +187,7 @@ describe("subscription link", () => {
     expect(listener).toHaveBeenCalledWith(result);
   });
 
-  it('can be unsubscribed', () => {
+  it("can be unsubscribed", () => {
     const echo = {
       private: jest.fn().mockReturnThis(),
       listen: jest.fn().mockReturnThis(),
@@ -196,7 +201,9 @@ describe("subscription link", () => {
       ),
     ]);
 
-    const subscriber = execute(link, { query: subscription }).subscribe(() => { });
+    const subscriber = execute(link, { query: subscription }).subscribe(
+      () => {}
+    );
     observer.next({
       data: {
         someEvent: null,
@@ -210,5 +217,5 @@ describe("subscription link", () => {
     expect(echo.leave).not.toHaveBeenCalled();
     subscriber.unsubscribe();
     expect(echo.leave).toHaveBeenCalledWith("private-lighthouse-2345");
-  })
+  });
 });

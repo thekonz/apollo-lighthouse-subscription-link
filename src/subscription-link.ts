@@ -1,4 +1,4 @@
-import { Observable, Observer, ApolloLink } from '@apollo/client/core'
+import { Observable, Observer, ApolloLink } from "@apollo/client/core";
 import type {
   Operation,
   NextLink,
@@ -20,7 +20,9 @@ function subscribeToEcho(
   channelName: string,
   observer: Observer<FetchResult>
 ) {
-  const channel = echoClient.private(channelName.replace(/^private\-/, '')) as FixedEchoChannel;
+  const channel = echoClient.private(
+    channelName.replace(/^private\-/, "")
+  ) as FixedEchoChannel;
 
   channel.listen(".lighthouse-subscription", (result: { data: any }) =>
     observer.next(result.data)
@@ -41,14 +43,24 @@ function createSubscriptionHandler(
   setChannelName: (name: string) => any
 ) {
   return (data: FetchResult) => {
-    const operationDefinition: OperationDefinitionNode = operation.query.definitions.find(definitionNode => definitionNode.kind === "OperationDefinition") as OperationDefinitionNode
-    const fieldNode: FieldNode = operationDefinition.selectionSet.selections.find(definitionNode => definitionNode.kind === "Field") as FieldNode
+    const operationDefinition: OperationDefinitionNode =
+      operation.query.definitions.find(
+        (definitionNode) => definitionNode.kind === "OperationDefinition"
+      ) as OperationDefinitionNode;
+    const fieldNode: FieldNode =
+      operationDefinition.selectionSet.selections.find(
+        (definitionNode) => definitionNode.kind === "Field"
+      ) as FieldNode;
     const subscriptionName: string | null = fieldNode.name.value;
-    const lighthouseVersion = data?.extensions?.lighthouse_subscriptions?.version; 
-      
-    const channelName: string | null = lighthouseVersion == 2 ?
-        data?.extensions?.lighthouse_subscriptions?.channel :
-        data?.extensions?.lighthouse_subscriptions?.channels?.[subscriptionName];
+    const lighthouseVersion =
+      data?.extensions?.lighthouse_subscriptions?.version;
+
+    const channelName: string | null =
+      lighthouseVersion == 2
+        ? data?.extensions?.lighthouse_subscriptions?.channel
+        : data?.extensions?.lighthouse_subscriptions?.channels?.[
+            subscriptionName
+          ];
 
     if (channelName) {
       setChannelName(channelName);
@@ -66,7 +78,12 @@ function createRequestHandler(echoClient: Echo): RequestHandler {
 
     return new Observable((observer) => {
       forward(operation).subscribe(
-        createSubscriptionHandler(echoClient, operation, observer, (name) => channelName = name)
+        createSubscriptionHandler(
+          echoClient,
+          operation,
+          observer,
+          (name) => (channelName = name)
+        )
       );
 
       return () => unsubscribe(echoClient, () => channelName);
