@@ -1,14 +1,12 @@
-import { ApolloLink, Observable } from "apollo-link";
-
+import { Observable, Observer, ApolloLink } from '@apollo/client/core'
 import type {
   Operation,
   NextLink,
   FetchResult,
   RequestHandler,
-} from "apollo-link";
+} from "@apollo/client/core";
 
 import type Echo from "laravel-echo";
-import { Observer } from "apollo-client/util/Observable";
 
 import type { PresenceChannel, Channel } from "laravel-echo/dist/channel";
 import { OperationDefinitionNode, FieldNode } from "graphql";
@@ -25,7 +23,7 @@ function subscribeToEcho(
   const channel = echoClient.private(channelName.replace(/^private\-/, '')) as FixedEchoChannel;
 
   channel.listen(".lighthouse-subscription", (result: { data: any }) =>
-    observer.next(result.data?.data || result.data)
+    observer.next(result.data)
   );
 }
 

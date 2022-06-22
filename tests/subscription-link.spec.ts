@@ -1,8 +1,7 @@
 import { createLighthouseSubscriptionLink } from "../src/subscription-link";
 import gql from "graphql-tag";
 import Echo from "laravel-echo";
-import { ApolloLink, execute, Observable, FetchResult } from "apollo-link";
-import { Observer } from "apollo-client/util/Observable";
+import { Observer, ApolloLink, Observable, execute, FetchResult } from "@apollo/client/core";
 
 jest.mock("laravel-echo");
 
@@ -86,13 +85,13 @@ describe("subscription link", () => {
     const listener: Function = echo.listen.mock.calls[0][1];
     expect(subscriptionHandler).not.toHaveBeenCalled();
     const events = [
-      { data: { data: { someEvent: { someProperty: "no" } } }, extensions: {} },
-      { data: { data: { someEvent: { someProperty: "yes" } } }, extensions: {} },
+      { data: { someEvent: { someProperty: "no" } }, extensions: {} },
+      { data: { someEvent: { someProperty: "yes" } }, extensions: {} },
     ];
     listener(events[0]);
-    expect(subscriptionHandler).toHaveBeenCalledWith(events[0].data.data);
+    expect(subscriptionHandler).toHaveBeenCalledWith(events[0].data);
     listener(events[1]);
-    expect(subscriptionHandler).toHaveBeenCalledWith(events[1].data.data);
+    expect(subscriptionHandler).toHaveBeenCalledWith(events[1].data);
   });
 
   it("works with version 2.", () => {
@@ -141,13 +140,13 @@ describe("subscription link", () => {
     const listener: Function = echo.listen.mock.calls[0][1];
     expect(subscriptionHandler).not.toHaveBeenCalled();
     const events = [
-      { data: { data: { someEvent: { someProperty: "no" } } }, extensions: {} },
-      { data: { data: { someEvent: { someProperty: "yes" } } }, extensions: {} },
+      { data: { someEvent: { someProperty: "no" } }, extensions: {} },
+      { data: { someEvent: { someProperty: "yes" } }, extensions: {} },
     ];
     listener(events[0]);
-    expect(subscriptionHandler).toHaveBeenCalledWith(events[0].data.data);
+    expect(subscriptionHandler).toHaveBeenCalledWith(events[0].data);
     listener(events[1]);
-    expect(subscriptionHandler).toHaveBeenCalledWith(events[1].data.data);
+    expect(subscriptionHandler).toHaveBeenCalledWith(events[1].data);
   });
     
   it("forwards any query without subscription data", () => {
