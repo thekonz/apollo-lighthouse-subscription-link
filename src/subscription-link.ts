@@ -83,7 +83,8 @@ function createRequestHandler(echoClient: Echo): RequestHandler {
           operation,
           observer,
           (name) => (channelName = name)
-        )
+        ),
+        error => observer.error(error)
       );
 
       return () => unsubscribe(echoClient, () => channelName);
